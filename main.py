@@ -66,7 +66,7 @@ def get_user_position_cod():
 def process_next_cod():
 
     if redis_client.hlen(cod_processing_key) > 0:
-        return jsonify({'processing': redis_client.hget(cod_processing_key)}), 400
+        return jsonify({'processing': list(redis_client.hgetall(cod_processing_key).keys())[0]})
 
     request_data = redis_client.lpop(cod_queue)
 
@@ -74,7 +74,7 @@ def process_next_cod():
         request_info = json.loads(request_data)
         user_id = request_info['id']
 
-        redis_client.hset(cod_processing_key, user_id, json.dumps(request_info))
+        redis_client.hset(cod_processing_key, user_id, json.dumps(user_id))
 
         return jsonify({'processing': user_id})
 
@@ -134,7 +134,7 @@ def get_user_position_edit_user():
 def process_next_edit_user():
 
     if redis_client.hlen(edit_user_processing_key) > 0:
-        return jsonify({'error': 'Já existe um usuário sendo processado'}), 400
+        return jsonify({'processing':  redis_client.hset(edit_user_processing_key, user_id)})
 
     request_data = redis_client.lpop(edit_user_queue)
 
