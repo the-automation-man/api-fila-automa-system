@@ -134,7 +134,7 @@ def get_user_position_edit_user():
 def process_next_edit_user():
 
     if redis_client.hlen(edit_user_processing_key) > 0:
-        return jsonify({'processing':  redis_client.hset(edit_user_processing_key, user_id)})
+        return jsonify({'processing': list(redis_client.hgetall(cod_processing_key).keys())[0]})
 
     request_data = redis_client.lpop(edit_user_queue)
 
