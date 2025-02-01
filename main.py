@@ -34,7 +34,7 @@ def add_user_cod():
 
 
     if not user_id:
-        return jsonify({'error': 'ID do usuário é obrigatório'}), 400
+        return jsonify({'error': 'ID do usuário é obrigatório'})
 
     redis_client.rpush(cod_queue, json.dumps({'id': user_id}))
 
