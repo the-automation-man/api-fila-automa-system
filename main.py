@@ -66,7 +66,7 @@ def get_user_position_cod():
 def process_next_cod():
 
     if redis_client.hlen(cod_processing_key) > 0:
-        return jsonify({'error': 'Já existe um usuário sendo processado'}), 400
+        return jsonify({'processing': redis_client.hget(cod_processing_key)}), 400
 
     request_data = redis_client.lpop(cod_queue)
 
