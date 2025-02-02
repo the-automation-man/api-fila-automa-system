@@ -78,7 +78,7 @@ def process_next_cod():
 
         return jsonify({'processing': user_id})
 
-    return jsonify({'message': 'Fila vazia'})
+    return jsonify({'processing': 'Fila vazia'})
 
 
 @app.route('/queue/completed/cod', methods=['GET'])
@@ -146,7 +146,7 @@ def process_next_edit_user():
 
         return jsonify({'processing': user_id})
 
-    return jsonify({'message': 'Fila vazia'})
+    return jsonify({'processing': 'Fila vazia'})
 
 
 @app.route('/queue/completed/edit_user', methods=['GET'])
